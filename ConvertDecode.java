@@ -13,13 +13,13 @@ public class ConvertDecode {
 			while((binaryInput.substring(j+1, j+2)).equals(tempCharSet.substring(0,1))) {
 				tempCharSet = tempCharSet + binaryInput.substring(j+1, j+2);
 				j++;
-				if (tempCharSet.length() > 15) {
+				if ((tempCharSet.length() > 10) || (j > binaryInput.length()-2)) {
 					break;
 				}
 			}
 			
 			if (tempCharSet.contains("1")) {
-				if (tempCharSet.length() < 5) {
+				if (tempCharSet.length() <= 3) {
 					result = result + ".";
 				} else {
 					result = result + "-";
@@ -27,83 +27,78 @@ public class ConvertDecode {
 			} else if (tempCharSet.contains("0")) {
 				if (tempCharSet.length() > 4) {
 					result = result + " ";
-				} else if (tempCharSet.length() > 10) {
-					break;
 				}
 			}
 			
 		}
 		
-		System.out.println(result + " got here");
+		System.out.println(result);
 		
-		for (int k = 0; k < result.length(); k++) {
-			String currentLetter = "";
+		String[] morseCodeCombinations = result.split(" ");
+		
+		for (int k = 0; k < morseCodeCombinations.length; k++) {
 			
-			if ((result.substring(k, k+1)).equals(".") || (result.substring(k, k+1)).equals("-")) {
-				currentLetter = currentLetter + result.substring(k, k+1);
-			} else {
-				currentLetter = currentLetter + " ";
+			String currentLetter = morseCodeCombinations[k];
 				
-				if (currentLetter.equals(".- ")) {
-					finalResult = finalResult + "a";
-				}if (currentLetter.equals("-... ")) {
-					finalResult = finalResult + "b";
-				}if (currentLetter.equals("-.-. ")) {
-					finalResult = finalResult + "c";
-				}if (currentLetter.equals("-.. ")) {
-					finalResult = finalResult + "d";
-				}if (currentLetter.equals(". ")) {
-					finalResult = finalResult + "e";
-				}if (currentLetter.equals("..-. ")) {
-					finalResult = finalResult + "f";
-				}if (currentLetter.equals("--. ")) {
-					finalResult = finalResult + "g";
-				}if (currentLetter.equals(".... ")) {
-					finalResult = finalResult + "h";
-				}if (currentLetter.equals(".. ")) {
-					finalResult = finalResult + "i";
-				}if (currentLetter.equals(".--- ")) {
-					finalResult = finalResult + "j";
-				}if (currentLetter.equals("-.- ")) {
-					finalResult = finalResult + "k";
-				}if (currentLetter.equals(".-.. ")) {
-					finalResult = finalResult + "l";
-				}if (currentLetter.equals("-- ")) {
-					finalResult = finalResult + "m";
-				}if (currentLetter.equals("-. ")) {
-					finalResult = finalResult + "n";
-				}if (currentLetter.equals("--- ")) {
-					finalResult = finalResult + "o";
-				}if (currentLetter.equals(".--. ")) {
-					finalResult = finalResult + "p";
-				}if (currentLetter.equals("--.- ")) {
-					finalResult = finalResult + "q";
-				}if (currentLetter.equals(".-. ")) {
-					finalResult = finalResult + "r";
-				}if (currentLetter.equals("... ")) {
-					finalResult = finalResult + "s";
-				}if (currentLetter.equals("- ")) {
-					finalResult = finalResult + "t";
-				}if (currentLetter.equals("..- ")) {
-					finalResult = finalResult + "u";
-				}if (currentLetter.equals("...- ")) {
-					finalResult = finalResult + "v";
-				}if (currentLetter.equals(".-- ")) {
-					finalResult = finalResult + "w";
-				}if (currentLetter.equals("-..- ")) {
-					finalResult = finalResult + "x";
-				}if (currentLetter.equals("-.-- ")) {
-					finalResult = finalResult + "y";
-				}if (currentLetter.equals("--.. ")) {
-					finalResult = finalResult + "z";
-				}
-				
-				currentLetter = "";
-				
+			if (currentLetter.equals(".-")) {
+				finalResult = finalResult + "a";
+			}if (currentLetter.equals("-...")) {
+				finalResult = finalResult + "b";
+			}if (currentLetter.equals("-.-.")) {
+				finalResult = finalResult + "c";
+			}if (currentLetter.equals("-..")) {
+				finalResult = finalResult + "d";
+			}if (currentLetter.equals(".")) {
+				finalResult = finalResult + "e";
+			}if (currentLetter.equals("..-.")) {
+				finalResult = finalResult + "f";
+			}if (currentLetter.equals("--.")) {
+				finalResult = finalResult + "g";
+			}if (currentLetter.equals("....")) {
+				finalResult = finalResult + "h";
+			}if (currentLetter.equals("..")) {
+				finalResult = finalResult + "i";
+			}if (currentLetter.equals(".---")) {
+				finalResult = finalResult + "j";
+			}if (currentLetter.equals("-.-")) {
+				finalResult = finalResult + "k";
+			}if (currentLetter.equals(".-..")) {
+				finalResult = finalResult + "l";
+			}if (currentLetter.equals("--")) {
+				finalResult = finalResult + "m";
+			}if (currentLetter.equals("-.")) {
+				finalResult = finalResult + "n";
+			}if (currentLetter.equals("---")) {
+				finalResult = finalResult + "o";
+			}if (currentLetter.equals(".--.")) {
+				finalResult = finalResult + "p";
+			}if (currentLetter.equals("--.-")) {
+				finalResult = finalResult + "q";
+			}if (currentLetter.equals(".-.")) {
+				finalResult = finalResult + "r";
+			}if (currentLetter.equals("...")) {
+				finalResult = finalResult + "s";
+			}if (currentLetter.equals("-")) {
+				finalResult = finalResult + "t";
+			}if (currentLetter.equals("..-")) {
+				finalResult = finalResult + "u";
+			}if (currentLetter.equals("...-")) {
+				finalResult = finalResult + "v";
+			}if (currentLetter.equals(".--")) {
+				finalResult = finalResult + "w";
+			}if (currentLetter.equals("-..-")) {
+				finalResult = finalResult + "x";
+			}if (currentLetter.equals("-.--")) {
+				finalResult = finalResult + "y";
+			}if (currentLetter.equals("--..")) {
+				finalResult = finalResult + "z";
 			}
+			
+			currentLetter = " ";
 			
 		}
 		
+		System.out.println(finalResult);
 		return finalResult;
 		
 	}
