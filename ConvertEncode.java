@@ -71,9 +71,9 @@ public class ConvertEncode {
 			if (currentCharacter.equals(".")) {
 				numResultAsString = numResultAsString + "11000";
 			}if (currentCharacter.equals("-")) {
-				numResultAsString = numResultAsString + "1111111000";
+				numResultAsString = numResultAsString + "111111000";
 			}if (currentCharacter.equals(" ")) {
-				numResultAsString = numResultAsString + "000000";
+				numResultAsString = numResultAsString + "00000";
 			}
 		}
 		
