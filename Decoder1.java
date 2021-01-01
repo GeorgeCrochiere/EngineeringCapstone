@@ -7,7 +7,14 @@ public String Decoding1(String originalText) {
 		String result = "";
 		
 		for (int i = 0; i < originalText.length(); i=i+5) {
-			String tempChar = originalText.substring(i,i+5);
+			String tempChar = "";
+			try {
+				tempChar = originalText.substring(i,i+5);
+			}
+			catch (Exception e) {
+				tempChar = originalText.substring(i);
+			}
+			
 			if (tempChar.equals("jkanm")||tempChar.equals("ytejn")||tempChar.equals("keqaz")||tempChar.equals("yvxcq")) {
 				result = result + "a";
 			}
