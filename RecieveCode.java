@@ -19,6 +19,7 @@ public class RecieveCode {
 		inputSensor.setShutdownOptions(true);
 		boolean continueLoop = true;
 		boolean writeDataCheck = false;
+		int endZeroCounter = 0;
 		
 		while(continueLoop) {
 			if (inputSensor.getState() == PinState.LOW) {
@@ -31,36 +32,29 @@ public class RecieveCode {
 					if (inputSensor.getState() == PinState.LOW) {
 						System.out.print("1");
 						data.add("1");
+						endZeroCounter = 0;
 						ac.delayTiming(delay);
 						//Thread.sleep(delay);
 					} else {
 						System.out.print("0");
 						data.add("0");
+						endZeroCounter++;
 						ac.delayTiming(delay);
 						//Thread.sleep(delay);
 					}
-					if ((data.size()) > 16) {
-						String currentData = data.toString();
-						currentData = currentData.replaceAll(", ", "");
-						currentData = currentData.replaceAll("\\[", "");
-						currentData = currentData.replaceAll("\\]", "");
-						String endOfData = currentData.substring((currentData.length()-16),(currentData.length()));
-						if (endOfData.equals("0000000000000000")) {
-							writeDataCheck = false;
-							System.out.println(" ");
-							System.out.println("Message Recieved...");
-							String finalResult = data.toString();
-							finalResult = finalResult.replaceAll(", ", "");
-							finalResult = finalResult.replaceAll("\\[", "");
-							finalResult = finalResult.replaceAll("\\]", "");
-							String binaryAsLetters = cd.NumbersToLetters(finalResult);
-							//String lettersDecoded = d1.Decoding1(binaryAsLetters);
-							System.out.println(finalResult);
-							System.out.println(binaryAsLetters);
-							//System.out.println(lettersDecoded);
-							gpioIn.unprovisionPin(inputSensor);
-							gpioIn.shutdown();
-						}
+					if (endZeroCounter > 15) {
+						writeDataCheck = false;
+						System.out.println(" ");
+						System.out.println("Message Recieved...");
+						String finalResult = data.toString();
+						finalResult = finalResult.replaceAll(", ", "");
+						finalResult = finalResult.replaceAll("\\[", "");
+						finalResult = finalResult.replaceAll("\\]", "");
+						String binaryAsLetters = cd.NumbersToLetters(finalResult);
+						String lettersDecoded = d1.Decoding1(binaryAsLetters);
+						System.out.println(lettersDecoded);
+						gpioIn.unprovisionPin(inputSensor);
+						gpioIn.shutdown();
 					}
 				}
 			}
